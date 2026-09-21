@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拓扑故障传播仿真</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="toolbar">
+  <span class="title">拓扑故障传播仿真</span>
+  <button id="btn-reset" title="恢复初始状态">重置故障</button>
+  <button id="btn-relayout" title="重新计算布局">重新布局</button>
+  <label>节点数
+    <select id="sel-size">
+      <option value="40">40</option>
+      <option value="80" selected>80</option>
+      <option value="150">150</option>
+      <option value="300">300</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="chk-anim" checked> 动画</label>
+  <span id="fps" class="metric">FPS: --</span>
+  <span id="status" class="metric">就绪</span>
+</header>
+
+<main id="stage">
+  <svg id="topo-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+  <canvas id="anim-canvas"></canvas>
+  <div id="tooltip" hidden></div>
+</main>
+
+<div id="toast-container" aria-live="polite"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

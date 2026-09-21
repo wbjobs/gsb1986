@@ -1,0 +1,62 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+body { display: flex; flex-direction: column; background: #0f1420; color: #dbe4f0; }
+
+#toolbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; background: #171e2e; border-bottom: 1px solid #26314a;
+  flex: 0 0 auto; user-select: none;
+}
+#toolbar .title { font-weight: 600; margin-right: 12px; color: #8fb8ff; }
+#toolbar button {
+  background: #24314d; color: #dbe4f0; border: 1px solid #3a4a6e;
+  border-radius: 4px; padding: 4px 12px; cursor: pointer; font-size: 13px;
+}
+#toolbar button:hover { background: #2e3f63; }
+#toolbar label { font-size: 13px; display: flex; align-items: center; gap: 4px; }
+#toolbar select { background: #24314d; color: #dbe4f0; border: 1px solid #3a4a6e; border-radius: 4px; padding: 2px 4px; }
+.metric { margin-left: auto; font-size: 12px; color: #8fa3c8; font-variant-numeric: tabular-nums; }
+.metric + .metric { margin-left: 16px; }
+
+#stage { position: relative; flex: 1 1 auto; overflow: hidden; }
+
+#topo-svg, #anim-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#anim-canvas { pointer-events: none; }
+
+.topo-edge { stroke: #3a4a6e; stroke-width: 1.2; transition: stroke .3s; }
+.topo-edge.fault { stroke: #ff5252; stroke-width: 2; }
+.topo-edge.warn  { stroke: #ffb142; stroke-width: 1.8; }
+
+.topo-node { cursor: pointer; }
+.topo-node circle { fill: #2f9e6e; stroke: #1c5c40; stroke-width: 1.5; transition: fill .3s, stroke .3s; }
+.topo-node text { fill: #aebdd8; font-size: 10px; text-anchor: middle; pointer-events: none; }
+.topo-node.core circle     { fill: #3d7bd9; stroke: #2456a5; }
+.topo-node.agg circle      { fill: #2f9e6e; stroke: #1c5c40; }
+.topo-node.access circle   { fill: #7a6fd0; stroke: #4f448f; }
+.topo-node.warn circle     { fill: #ffb142; stroke: #c47f17; }
+.topo-node.fault circle    { fill: #ff5252; stroke: #b03030; }
+.topo-node.fault-source circle { stroke: #fff; stroke-width: 2.5; }
+.topo-node.dragging circle { stroke: #fff; }
+
+#tooltip {
+  position: absolute; pointer-events: none; z-index: 5;
+  background: rgba(20, 28, 46, .95); border: 1px solid #3a4a6e; border-radius: 4px;
+  padding: 6px 10px; font-size: 12px; line-height: 1.5; color: #dbe4f0;
+}
+
+#toast-container {
+  position: fixed; top: 52px; right: 16px; z-index: 100;
+  display: flex; flex-direction: column; gap: 8px; max-width: 360px;
+}
+.toast {
+  padding: 10px 14px; border-radius: 6px; font-size: 13px; line-height: 1.4;
+  background: #24314d; border-left: 4px solid #3d7bd9; color: #dbe4f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,.4); animation: toast-in .25s ease-out;
+}
+.toast.error { border-left-color: #ff5252; background: #3a2330; }
+.toast.warn  { border-left-color: #ffb142; }
+.toast.ok    { border-left-color: #2f9e6e; }
+.toast.fade-out { opacity: 0; transition: opacity .4s; }
+@keyframes toast-in { from { transform: translateX(30px); opacity: 0; } to { transform: none; opacity: 1; } }
