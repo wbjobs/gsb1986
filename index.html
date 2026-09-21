@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拓扑故障传播可视化</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header id="toolbar">
+    <h1>拓扑故障传播</h1>
+    <label>节点数
+      <select id="node-count">
+        <option value="100">100</option>
+        <option value="300" selected>300</option>
+        <option value="800">800</option>
+        <option value="1500">1500</option>
+      </select>
+    </label>
+    <button id="btn-rebuild">重建拓扑</button>
+    <button id="btn-inject">随机注入故障</button>
+    <button id="btn-play">播放</button>
+    <button id="btn-reset">重置</button>
+    <label>速度
+      <select id="speed">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="2">2x</option>
+        <option value="4">4x</option>
+      </select>
+    </label>
+    <input id="progress" type="range" min="0" max="1" step="0.001" value="0" />
+    <span id="time">0.0 s</span>
+  </header>
+
+  <main id="stage-wrap">
+    <svg id="stage"></svg>
+    <canvas id="fx"></canvas>
+    <div id="hud">
+      <span id="layout-status">初始化…</span>
+      <span>故障节点: <b id="stat-faults">0 / 0</b></span>
+      <span>传播时长: <b id="stat-duration">-</b></span>
+      <span id="fps">-- fps</span>
+    </div>
+    <div id="legend">
+      <span><i class="dot dot-ok"></i>正常</span>
+      <span><i class="dot dot-warn"></i>预警</span>
+      <span><i class="dot dot-fault"></i>故障</span>
+      <span class="hint">点击节点注入故障 · 拖拽平移 · 滚轮缩放</span>
+    </div>
+  </main>
+
+  <div id="toasts"></div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
